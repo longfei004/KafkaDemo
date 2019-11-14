@@ -13,11 +13,12 @@ repositories {
 }
 
 dependencies {
-	compile 'org.springframework.kafka:spring-kafka:2.3.3.RELEASE'
+	compile 'org.springframework.kafka:spring-kafka:2.3.0.RELEASE'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+	testImplementation('org.junit.jupiter:junit-jupiter:5.4.2')
 }
 
 test {

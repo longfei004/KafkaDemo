@@ -15,15 +15,21 @@ import java.util.Map;
 @Configuration
 public class KafkaProducerConfig {
     
-    @Value(value = "${kafka.bootstrapAddress}")
-    private String bootstrapAddress;
+    @Value(value = "${spring.kafka.producer.bootstrap-servers}")
+    private String bootstrapServers;
+    
+    @Value(value = "${spring.kafka.producer.key-serializer}")
+    private String keySerializer;
+    
+    @Value(value = "${spring.kafka.producer.value-serializer}")
+    private String valueSerializer;
     
     @Bean
     public ProducerFactory<String, String> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
-        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
-        configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, keySerializer);
+        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, valueSerializer);
         
         return new DefaultKafkaProducerFactory<>(configProps);
     }
